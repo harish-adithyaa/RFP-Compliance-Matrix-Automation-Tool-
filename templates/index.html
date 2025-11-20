@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="{{ url_for('process') }}" method="post" enctype="multipart/form-data" class="space-y-4" onsubmit="document.getElementById('busy').classList.remove('hidden')">
+  <div>
+    <label class="block text-sm font-medium mb-1">Upload file (.csv / .xlsx / .xls)</label>
+    <input required type="file" name="file" accept=".csv,.xlsx,.xls" class="block w-full text-sm file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
+  </div>
+  <button class="px-4 py-2 rounded-xl bg-slate-800 text-white text-sm font-medium hover:bg-slate-700">Process</button>
+  <div id="busy" class="hidden text-sm text-slate-600 flex items-center gap-2">
+    <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" fill="none" opacity="0.2"></circle><path d="M22 12a10 10 0 0 1-10 10" fill="none" stroke="currentColor" stroke-width="4"></path></svg>
+    Working… this can take a bit if there are many rows.
+  </div>
+</form>
+
+<div class="mt-6 text-xs text-slate-500">
+  <p><strong>Format tip:</strong> The file must include a header column named <code>question</code>. An <code>answer</code> column will be created/overwritten.</p>
+</div>
+{% endblock %}
